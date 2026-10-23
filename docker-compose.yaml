@@ -1,5 +1,4 @@
 services:
-
   mongo:
     image: mongo:7.0
     container_name: mongodb
@@ -12,6 +11,43 @@ services:
 
     volumes:
       - mongo-data:/data/db
+
+
+  employeeservice:
+    build: ./employeeservice
+    container_name: employeeservice
+    ports: 
+      - "5003:5003"
+    environment:
+      MONGODB_URI: mongodb://myUser:myPassword@mongo:27017/kindergarten?authSource=admin
+      DATABASE_NAME: kindergarten
+  
+  studentservice:
+    build: ./studentservice
+    container_name: studentservice
+    ports: 
+      - "5001:5001"
+    environment:
+      MONGODB_URI: mongodb://myUser:myPassword@mongo:27017/kindergarten?authSource=admin
+      DATABASE_NAME: kindergarten
+
+  teacherservice:
+    build: ./teacherservice
+    container_name: teacherservice
+    ports:
+      - "5002:5002"
+    environment:
+      MONGODB_URI: mongodb://myUser:myPassword@mongo:27017/kindergarten?authSource=admin
+      DATABASE_NAME: kindergarten
+
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+  
+
 
 volumes:
   mongo-data:
