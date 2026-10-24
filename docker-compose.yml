@@ -63,6 +63,47 @@ services:
       timeout: 3s
       retries: 5
       start_period: 10s
+    
+  employeeservice:
+    build: ./employeeservice
+    container_name: employeeservice
+    env_file: ./employeeservice/.env
+    ports:
+      - "5003:5003"
+  
+  studentservice:
+    build: ./studentservice
+    container_name: studentservice
+    env_file: ./studentservice/.env
+    ports:
+      - "5001:5001"
+  
+  teacherservice:
+    build: ./teacherservice
+    container_name: teacherservice
+    env_file: ./teacherservice/.env
+    ports:
+      - "5002:5002"
+
+  profileservice:
+    build: ./profileservice
+    container_name: profileservice
+    env_file: ./profileservice/.env
+    ports:
+      - "5004:5004"
+  
+  thumbnailworker:
+    build: ./thumbnailworker
+    container_name: thumbnailworker
+    env_file: ./thumbnailworker/.env
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    env_file: ./frontend/.env
+    ports:
+      - "3000:3000"
+
 
 volumes:
   mongo-data:
