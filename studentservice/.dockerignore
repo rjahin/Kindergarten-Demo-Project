@@ -1,3 +1,3 @@
 .git
-.env
-studentservice
+Dockerfile
+.dockerignore

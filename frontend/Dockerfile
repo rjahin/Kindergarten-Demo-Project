@@ -1,4 +1,4 @@
-FROM node:24 as stage1
+FROM node:24 AS stage1
 
 WORKDIR /app
 
