@@ -2,8 +2,6 @@ services:
   mongo:
     image: mongo:7
     container_name: mongodb
-    ports:
-      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
@@ -48,7 +46,6 @@ services:
   object-storage:
     image: rustfs/rustfs:1.0.1
     ports:
-      - "9000:9000"
       - "9001:9001"
     environment:
       RUSTFS_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY}
@@ -68,30 +65,23 @@ services:
     build: ./employeeservice
     container_name: employeeservice
     env_file: ./employeeservice/.env
-    ports:
-      - "5003:5003"
   
   studentservice:
     build: ./studentservice
     container_name: studentservice
     env_file: ./studentservice/.env
-    ports:
-      - "5001:5001"
   
   teacherservice:
     build: ./teacherservice
     container_name: teacherservice
     env_file: ./teacherservice/.env
-    ports:
-      - "5002:5002"
+
 
   profileservice:
     build: ./profileservice
     container_name: profileservice
     env_file: ./profileservice/.env
-    ports:
-      - "5004:5004"
-  
+
   thumbnailworker:
     build: ./thumbnailworker
     container_name: thumbnailworker
@@ -101,8 +91,13 @@ services:
     build: ./frontend
     container_name: frontend
     env_file: ./frontend/.env
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
     ports:
-      - "3000:3000"
+      - "80:80"
+    restart: always
 
 
 volumes:
