@@ -1,7 +1,6 @@
 __pycache__
 test_worker.py
 .venv
-.env
 .env.example
 .dockerignore
 Dockerfile
