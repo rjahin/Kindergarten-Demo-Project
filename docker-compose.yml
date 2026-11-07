@@ -50,6 +50,7 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+      - "5004:5004"
     environment:
       RUSTFS_ACCESS_KEY: ${OBJECT_STORAGE_ACCESS_KEY}
       RUSTFS_SECRET_KEY: ${OBJECT_STORAGE_SECRET_KEY}
@@ -89,8 +90,7 @@ services:
     build: ./profileservice
     container_name: profileservice
     env_file: ./profileservice/.env
-    ports:
-      - "5004:5004"
+    network_mode: "service:object-storage"
   
   thumbnailworker:
     build: ./thumbnailworker
